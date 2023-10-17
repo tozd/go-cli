@@ -26,6 +26,8 @@ import (
 //	}
 //
 // [Kong]: https://github.com/alecthomas/kong
+//
+//nolint:gochecknoglobals
 var (
 	Version        = ""
 	BuildTimestamp = ""

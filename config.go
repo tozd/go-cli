@@ -33,7 +33,7 @@ import (
 type ConfigFlag string
 
 func (c ConfigFlag) BeforeResolve(app *kong.Kong, ctx *kong.Context, trace *kong.Path) error {
-	path := string(ctx.FlagValue(trace.Flag).(ConfigFlag))
+	path := string(ctx.FlagValue(trace.Flag).(ConfigFlag)) //nolint:forcetypeassert
 	file, err := os.Open(kong.ExpandPath(path))
 	if err != nil {
 		return errors.WithStack(err)

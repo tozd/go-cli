@@ -118,7 +118,7 @@ func Run(config interface{}, vars kong.Vars, run func(*kong.Context) errors.E) {
 		}
 	}()
 
-	logFile, errE := zerolog.New(&config)
+	logFile, errE := zerolog.New(config)
 	if logFile != nil {
 		defer logFile.Close()
 	}

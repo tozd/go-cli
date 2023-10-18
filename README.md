@@ -8,6 +8,19 @@
 A Go package providing boilerplate combining [Kong](https://github.com/alecthomas/kong)
 CLI argument parsing with [zerolog](https://gitlab.com/tozd/go/zerolog) logging.
 
+Features:
+
+- Config (from files, CLI arguments, and environment variables) is parsed into a struct
+  based on struct tags, powered by [Kong](https://github.com/alecthomas/kong).
+- JSON-based and pretty-printed logging, powered by [zerolog](https://gitlab.com/tozd/go/zerolog).
+- Support for built-time version variables and CLI flag.
+- Handles exit codes: 0 for success, 1 for initialization errors
+  (CLI argument parsing or zerolog configuration failures),
+  2 for panics, and 3 for program errors.
+- All logging goes to stdout and unexpected errors go to stderr.
+- On errors, a stack trace and other details from errors are shown,
+  powered by [gitlab.com/tozd/go/errors](https://gitlab.com/tozd/go/errors).
+
 ## Installation
 
 This is a Go package. You can add it to your project using `go get`:

@@ -61,8 +61,8 @@ func (e *fmtError) Unwrap() error {
 //
 // Run function should always return and never call os.Exit. If it does not return
 // an error, the program exits with code 0. If it returns an error, the program exits
-// with code 3. The program exits with code 1 when CLI argument parsing or zerolog
-// configuration fails. The program exits with code 2 on panic.
+// with code 3. The program exits with code 1 for initialization errors (CLI argument
+// parsing or zerolog configuration failures). The program exits with code 2 on panic.
 //
 // Run function should not do any output to stdout by itself, but should exclusively
 // use the logger. Logger then uses stdout for pretty-printed or JSON logging

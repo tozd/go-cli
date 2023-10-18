@@ -56,7 +56,8 @@ func (e *fmtError) Unwrap() error {
 // in "config" struct.
 //
 // Kong vars can override zerolog defaults and add additional variables which can then
-// be interpolated in Kong struct tags in config struct.
+// be interpolated in Kong struct tags in config struct. Var named "description"
+// is used for program's description in usage help, if provided.
 //
 // Run function should always return and never call os.Exit. If it does not return
 // an error, the program exits with code 0. If it returns an error, the program exits
@@ -73,12 +74,12 @@ func (e *fmtError) Unwrap() error {
 // [Kong]: https://github.com/alecthomas/kong
 // [zerolog]: https://gitlab.com/tozd/go/zerolog
 // [dinit]: https://gitlab.com/tozd/dinit
-func Run(config interface{}, description string, vars kong.Vars, run func(*kong.Context) errors.E) {
+func Run(config interface{}, vars kong.Vars, run func(*kong.Context) errors.E) {
 	// Inside this function, panicking should be set to false before all regular returns from it.
 	panicking := true
 
 	parser, err := kong.New(config,
-		kong.Description(description),
+		kong.Description(vars["description"]),
 		kong.UsageOnError(),
 		kong.Writers(
 			os.Stderr,

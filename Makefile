@@ -1,10 +1,13 @@
 .PHONY: test test-ci lint lint-ci fmt fmt-ci clean release lint-docs audit encrypt decrypt sops
 
 test:
-	gotestsum --format pkgname --packages ./... -- -race -timeout 10m -cover -covermode atomic
+	mkdir -p coverage
+	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/single.go -c _examples/single.yml
+	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/multi.go --logging.console.type=nocolor plus 1 1
+	go tool covdata percent -i=coverage -pkg=gitlab.com/tozd/go/cli
 
-test-ci:
-	gotestsum --format pkgname --packages ./... --junitfile tests.xml -- -race -timeout 10m -coverprofile=coverage.txt -covermode atomic
+test-ci: test
+	go tool covdata textfmt -i=coverage -pkg=gitlab.com/tozd/go/cli -o coverage.txt
 	gocover-cobertura < coverage.txt > coverage.xml
 	go tool cover -html=coverage.txt -o coverage.html
 
@@ -23,7 +26,7 @@ fmt-ci: fmt
 	git diff --exit-code --color=always
 
 clean:
-	rm -f coverage.* codeclimate.json tests.xml
+	rm -rf coverage.* codeclimate.json tests.xml coverage
 
 release:
 	npx --yes --package 'release-it@15.4.2' --package '@release-it/keep-a-changelog@3.1.0' -- release-it

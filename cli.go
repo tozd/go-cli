@@ -22,7 +22,7 @@ import (
 // version, your Kong config struct could be:
 //
 //	type Config struct {
-//		Version kong.VersionFlag `short:"V" help:"Show program's version and exit." json:"-" yaml:"-"`
+//		Version kong.VersionFlag `short:"V" help:"Show program's version and exit." yaml:"-"`
 //	}
 //
 // [Kong]: https://github.com/alecthomas/kong

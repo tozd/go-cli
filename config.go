@@ -25,7 +25,7 @@ import (
 // Example:
 //
 //	type Config struct {
-//		Config cli.ConfigFlag `short:"c" name:"config" placeholder:"PATH" help:"Load configuration from a JSON or YAML file." json:"-" yaml:"-"`
+//		Config cli.ConfigFlag `short:"c" name:"config" placeholder:"PATH" help:"Load configuration from a JSON or YAML file." yaml:"-"`
 //	}
 //
 // [Kong]: https://github.com/alecthomas/kong

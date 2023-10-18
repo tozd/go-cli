@@ -1,9 +1,11 @@
+SHELL = /bin/bash -o pipefail
+
 .PHONY: test test-ci lint lint-ci fmt fmt-ci clean release lint-docs audit encrypt decrypt sops
 
 test:
 	mkdir -p coverage
-	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/single.go -c _examples/single.yml
-	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/multi.go --logging.console.type=nocolor plus 1 1
+	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/single.go -c _examples/single.yml | egrep -q '^[0-9]{2}:[0-9]{2} INF Hello world! program=single$$'
+	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/multi.go --logging.console.type=nocolor plus 1 1 | egrep -q '^[0-9]{2}:[0-9]{2} INF 2$$'
 	go tool covdata percent -i=coverage -pkg=gitlab.com/tozd/go/cli
 
 test-ci: test

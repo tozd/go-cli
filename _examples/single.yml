@@ -1,4 +1,3 @@
 logging:
   console:
     type: nocolor
-    level: info

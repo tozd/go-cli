@@ -22,6 +22,8 @@ It requires Go 1.21 or newer.
 
 See full package documentation on [pkg.go.dev](https://pkg.go.dev/gitlab.com/tozd/go/cli#section-documentation).
 
+See [examples](./_examples/).
+
 ## GitHub mirror
 
 There is also a [read-only GitHub mirror available](https://github.com/tozd/go-cli),

@@ -36,7 +36,7 @@ func (c ConfigFlag) BeforeResolve(app *kong.Kong, ctx *kong.Context, trace *kong
 	path := string(ctx.FlagValue(trace.Flag).(ConfigFlag)) //nolint:forcetypeassert
 	file, err := os.Open(kong.ExpandPath(path))
 	if err != nil {
-		return errors.WithStack(err)
+		return errors.WithDetails(err, "path", path)
 	}
 	defer file.Close()
 	decoder := yaml.NewDecoder(file)

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2023-10-19
+
 ### Fixed
 
 - Relaxed Go version.
@@ -17,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First public release.
 
-[unreleased]: https://gitlab.com/tozd/go/cli/-/compare/v0.1.0...main
+[unreleased]: https://gitlab.com/tozd/go/cli/-/compare/v0.1.1...main
+[0.1.1]: https://gitlab.com/tozd/go/cli/-/compare/v0.1.0...v0.1.1
 [0.1.0]: https://gitlab.com/tozd/go/cli/-/tags/v0.1.0
 
 <!-- markdownlint-disable-file MD024 -->

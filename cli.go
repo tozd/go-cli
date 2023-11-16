@@ -51,6 +51,10 @@ func (e *fmtError) Unwrap() error {
 	return e.Err
 }
 
+type hasLoggingConfig interface {
+	GetLoggingConfig() *zerolog.LoggingConfig
+}
+
 // Run runs the "run" function after [Kong] parses CLI arguments into "config" struct
 // and [zerolog] logging is configured and Logger and Logger WithContext fields are set
 // in "config" struct.
@@ -74,7 +78,7 @@ func (e *fmtError) Unwrap() error {
 // [Kong]: https://github.com/alecthomas/kong
 // [zerolog]: https://gitlab.com/tozd/go/zerolog
 // [dinit]: https://gitlab.com/tozd/dinit
-func Run(config interface{}, vars kong.Vars, run func(*kong.Context) errors.E) {
+func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors.E) {
 	// Inside this function, panicking should be set to false before all regular returns from it.
 	panicking := true
 

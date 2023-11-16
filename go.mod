@@ -4,9 +4,9 @@ go 1.21
 
 require (
 	github.com/alecthomas/kong v0.8.1
-	github.com/rs/zerolog v1.31.1-0.20231014103838-6ed7439d9c6c
+	github.com/rs/zerolog v1.31.1-0.20231108200417-bb14b8b9de11
 	gitlab.com/tozd/go/errors v0.8.0
-	gitlab.com/tozd/go/zerolog v0.3.0
+	gitlab.com/tozd/go/zerolog v0.5.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -30,7 +30,7 @@ require (
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/whilp/git-urls v1.0.0 // indirect
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
-	gitlab.com/tozd/go/x v0.0.0-20231005202212-8fab71759a8f // indirect
+	gitlab.com/tozd/go/x v0.0.0-20231020213422-f3cd46ddd778 // indirect
 	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b // indirect
 	golang.org/x/net v0.0.0-20210326060303-6b1517762897 // indirect
 	golang.org/x/sys v0.12.0 // indirect

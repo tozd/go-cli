@@ -102,7 +102,7 @@ func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors
 		zerolog.KongLevelTypeMapper,
 	)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: % -+#.1v", err)
+		fmt.Fprintf(os.Stderr, "error: % -+#.1v", errors.Formatter{Error: err}) //nolint:exhaustruct
 		os.Exit(1)
 	}
 

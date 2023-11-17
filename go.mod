@@ -6,7 +6,7 @@ require (
 	github.com/alecthomas/kong v0.8.1
 	github.com/rs/zerolog v1.31.1-0.20231108200417-bb14b8b9de11
 	gitlab.com/tozd/go/errors v0.8.0
-	gitlab.com/tozd/go/zerolog v0.5.0
+	gitlab.com/tozd/go/zerolog v0.5.1
 	gopkg.in/yaml.v3 v3.0.1
 )
 

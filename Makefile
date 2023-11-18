@@ -3,6 +3,7 @@ SHELL = /bin/bash -o pipefail
 .PHONY: test test-ci lint lint-ci fmt fmt-ci clean release lint-docs audit encrypt decrypt sops
 
 test:
+	rm -rf coverage
 	mkdir -p coverage
 	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/single.go -c _examples/single.yml | egrep -q '^[0-9]{2}:[0-9]{2} INF Hello world! program=single$$'
 	GOCOVERDIR=coverage go run -race -cover -covermode atomic _examples/multi.go --logging.console.type=nocolor plus 1 1 | egrep -q '^[0-9]{2}:[0-9]{2} INF 2$$'

@@ -12,7 +12,7 @@ type Globals struct {
 	zerolog.LoggingConfig `yaml:",inline"`
 
 	Version kong.VersionFlag `help:"Show program's version and exit."                                              short:"V" yaml:"-"`
-	Config  cli.ConfigFlag   `help:"Load configuration from a JSON or YAML file." name:"config" placeholder:"PATH" short:"c" yaml:"-"`
+	App     cli.ConfigFlag   `help:"Load configuration from a JSON or YAML file." name:"config" placeholder:"PATH" short:"c" yaml:"-"`
 }
 
 type PlusCommand struct {
@@ -42,7 +42,7 @@ func (c *MinusCommand) Run(globals *Globals) errors.E { //nolint:unparam
 	return nil
 }
 
-type Config struct {
+type App struct {
 	Globals `yaml:"globals"`
 
 	Plus  PlusCommand  `cmd:"" help:"Add numbers."      yaml:"plus"`
@@ -50,8 +50,8 @@ type Config struct {
 }
 
 func main() {
-	var config Config
-	cli.Run(&config, nil, func(ctx *kong.Context) errors.E {
-		return errors.WithStack(ctx.Run(&config.Globals))
+	var app App
+	cli.Run(&app, nil, func(ctx *kong.Context) errors.E {
+		return errors.WithStack(ctx.Run(&app.Globals))
 	})
 }

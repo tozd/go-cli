@@ -9,16 +9,17 @@ import (
 )
 
 type Globals struct {
-	Version               kong.VersionFlag `help:"Show program's version and exit."             short:"V"     yaml:"-"`
-	Config                cli.ConfigFlag   `help:"Load configuration from a JSON or YAML file." name:"config" placeholder:"PATH" short:"c" yaml:"-"`
 	zerolog.LoggingConfig `yaml:",inline"`
+
+	Version kong.VersionFlag `help:"Show program's version and exit."                                              short:"V" yaml:"-"`
+	Config  cli.ConfigFlag   `help:"Load configuration from a JSON or YAML file." name:"config" placeholder:"PATH" short:"c" yaml:"-"`
 }
 
 type PlusCommand struct {
 	Numbers []int `arg:"" help:"Numbers to add." name:"number" yaml:"numbers"`
 }
 
-func (c *PlusCommand) Run(globals *Globals) errors.E {
+func (c *PlusCommand) Run(globals *Globals) errors.E { //nolint:unparam
 	sum := 0
 	for _, n := range c.Numbers {
 		sum += n
@@ -31,7 +32,7 @@ type MinusCommand struct {
 	Numbers []int `arg:"" help:"Numbers to subtract." name:"number" yaml:"numbers"`
 }
 
-func (c *MinusCommand) Run(globals *Globals) errors.E {
+func (c *MinusCommand) Run(globals *Globals) errors.E { //nolint:unparam
 	// Kong makes sure there is at least one number.
 	difference := c.Numbers[0]
 	for _, n := range c.Numbers[1:] {

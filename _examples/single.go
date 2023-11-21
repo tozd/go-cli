@@ -10,11 +10,13 @@ import (
 
 const DefaultMessage = "Hello world!"
 
+//nolint:lll
 type Config struct {
-	Version               kong.VersionFlag `help:"Show program's version and exit."             short:"V"                   yaml:"-"`
-	Config                cli.ConfigFlag   `help:"Load configuration from a JSON or YAML file." name:"config"               placeholder:"PATH"                                    short:"c"   yaml:"-"`
 	zerolog.LoggingConfig `yaml:",inline"`
-	Message               string `arg:""                                              default:"${defaultMessage}" help:"Message to output. Default: ${defaultMessage}." optional:"" placeholder:"STRING" yaml:"message"`
+
+	Version kong.VersionFlag `                                   help:"Show program's version and exit."                                                              short:"V" yaml:"-"`
+	Config  cli.ConfigFlag   `                                   help:"Load configuration from a JSON or YAML file."   name:"config"             placeholder:"PATH"   short:"c" yaml:"-"`
+	Message string           `arg:"" default:"${defaultMessage}" help:"Message to output. Default: ${defaultMessage}."               optional:"" placeholder:"STRING"           yaml:"message"`
 }
 
 func main() {

@@ -24,7 +24,7 @@ import (
 //
 // Example:
 //
-//	type Config struct {
+//	type App struct {
 //		Config cli.ConfigFlag `short:"c" name:"config" placeholder:"PATH" help:"Load configuration from a JSON or YAML file." yaml:"-"`
 //	}
 //

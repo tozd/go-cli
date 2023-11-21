@@ -21,7 +21,7 @@ import (
 // to show program's version. For example, to have "-v" CLI flag show program's
 // version, your Kong config struct could be:
 //
-//	type Config struct {
+//	type App struct {
 //		Version kong.VersionFlag `short:"V" help:"Show program's version and exit." yaml:"-"`
 //	}
 //

@@ -13,17 +13,17 @@ test-ci: test
 	go tool covdata textfmt -i=coverage -pkg=gitlab.com/tozd/go/cli -o coverage.txt
 	gocover-cobertura < coverage.txt > coverage.xml
 	go tool cover -html=coverage.txt -o coverage.html
-
 lint:
 	golangci-lint run --timeout 4m --color always --allow-parallel-runners --fix
-	find _examples -name '*.go' -exec golangci-lint run --timeout 4m --color always --allow-parallel-runners --fix {} ';'
+	find _examples -name '*.go' -print0 | xargs -0 -n1 -I % golangci-lint run --timeout 4m --color always --allow-parallel-runners --fix %
 
 lint-ci:
-	golangci-lint run --timeout 4m --out-format colored-line-number,code-climate:codeclimate.json
-	find _examples -name '*.go' -exec golangci-lint run --timeout 4m --out-format colored-line-number,code-climate:{}_codeclimate.json {} ';'
+	golangci-lint run --timeout 4m --out-format colored-line-number,code-climate:codeclimate.json --issues-exit-code 0
+	find _examples -name '*.go' -print0 | xargs -0 -n1 -I % golangci-lint run --timeout 4m --out-format colored-line-number,code-climate:%_codeclimate.json --issues-exit-code 0 %
 	jq -s 'add' codeclimate.json _examples/*_codeclimate.json > /tmp/codeclimate.json
 	mv /tmp/codeclimate.json codeclimate.json
 	rm -f _examples/*_codeclimate.json
+	jq -e '. == []' codeclimate.json
 
 fmt:
 	go mod tidy

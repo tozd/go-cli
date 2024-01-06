@@ -15,7 +15,7 @@ type App struct {
 	zerolog.LoggingConfig `yaml:",inline"`
 
 	Version kong.VersionFlag `                                   help:"Show program's version and exit."                                                              short:"V" yaml:"-"`
-	App     cli.ConfigFlag   `                                   help:"Load configuration from a JSON or YAML file."   name:"config"             placeholder:"PATH"   short:"c" yaml:"-"`
+	Config  cli.ConfigFlag   `                                   help:"Load configuration from a JSON or YAML file."   name:"config"             placeholder:"PATH"   short:"c" yaml:"-"`
 	Message string           `arg:"" default:"${defaultMessage}" help:"Message to output. Default: ${defaultMessage}."               optional:"" placeholder:"STRING"           yaml:"message"`
 }
 

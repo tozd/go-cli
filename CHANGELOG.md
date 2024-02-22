@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Pass extra Kong options in Run.
+
 ## [0.2.2] - 2023-11-17
 
 ### Fixed

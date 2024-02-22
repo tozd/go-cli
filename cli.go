@@ -78,11 +78,11 @@ type hasLoggingConfig interface {
 // [Kong]: https://github.com/alecthomas/kong
 // [zerolog]: https://gitlab.com/tozd/go/zerolog
 // [dinit]: https://gitlab.com/tozd/dinit
-func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors.E) {
+func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors.E, options ...kong.Option) {
 	// Inside this function, panicking should be set to false before all regular returns from it.
 	panicking := true
 
-	parser, err := kong.New(config,
+	fullOptions := []kong.Option{
 		kong.Description(vars["description"]),
 		kong.UsageOnError(),
 		kong.Writers(
@@ -100,7 +100,10 @@ func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors
 			"defaultLoggingContextTriggerLevel":     zerolog.DefaultContextTriggerLevel,
 		}.CloneWith(vars),
 		zerolog.KongLevelTypeMapper,
-	)
+	}
+	fullOptions = append(fullOptions, options...)
+
+	parser, err := kong.New(config, fullOptions...)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: % -+#.1v", errors.Formatter{Error: err}) //nolint:exhaustruct
 		os.Exit(1)

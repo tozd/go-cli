@@ -44,7 +44,7 @@ type fmtError struct {
 }
 
 func (e *fmtError) Error() string {
-	return fmt.Sprintf("% -+#.1v", errors.Formatter{Error: e.Err}) //nolint:exhaustruct
+	return fmt.Sprintf("% -+#.1v", errors.Formatter{Error: e.Err}) 
 }
 
 func (e *fmtError) Unwrap() error {
@@ -105,7 +105,7 @@ func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors
 
 	parser, err := kong.New(config, fullOptions...)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: % -+#.1v", errors.Formatter{Error: err}) //nolint:exhaustruct
+		fmt.Fprintf(os.Stderr, "error: % -+#.1v", errors.Formatter{Error: err}) 
 		os.Exit(1)
 	}
 

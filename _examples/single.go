@@ -16,7 +16,7 @@ type App struct {
 
 	Version kong.VersionFlag `                                   help:"Show program's version and exit."                                                            short:"V" yaml:"-"`
 	Config  cli.ConfigFlag   `                                   help:"Load configuration from a JSON or YAML file." name:"config"             placeholder:"PATH"   short:"c" yaml:"-"`
-	Message string           `arg:"" default:"${defaultMessage}" help:"Message to output. Default: ${default}."                    optional:"" placeholder:"STRING"           yaml:"message"`
+	Message string           `arg:"" default:"${defaultMessage}" help:"Message to output."                                         optional:"" placeholder:"STRING"           yaml:"message"`
 }
 
 func main() {

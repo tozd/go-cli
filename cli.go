@@ -100,6 +100,7 @@ func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors
 			"defaultLoggingContextTriggerLevel":     zerolog.DefaultContextTriggerLevel,
 		}.CloneWith(vars),
 		zerolog.KongLevelTypeMapper,
+		kong.ValueFormatter(DefaultValueFormatter),
 	}
 	fullOptions = append(fullOptions, options...)
 

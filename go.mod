@@ -6,9 +6,9 @@ toolchain go1.23.6
 
 require (
 	github.com/alecthomas/kong v1.8.1
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.33.1-0.20250103235336-1869fa55bea5
 	gitlab.com/tozd/go/errors v0.9.0
-	gitlab.com/tozd/go/zerolog v0.8.0
+	gitlab.com/tozd/go/zerolog v0.9.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 

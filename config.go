@@ -3,11 +3,10 @@ package cli
 import (
 	"io"
 	"os"
-	"strings"
 
 	"github.com/alecthomas/kong"
+	"github.com/goccy/go-yaml"
 	"gitlab.com/tozd/go/errors"
-	"gopkg.in/yaml.v3"
 )
 
 // ConfigFlag allows you to define a config struct passed to [Kong]
@@ -29,7 +28,7 @@ import (
 //	}
 //
 // [Kong]: https://github.com/alecthomas/kong
-// [UnmarshalYAML]: https://pkg.go.dev/gopkg.in/yaml.v3#Unmarshaler
+// [UnmarshalYAML]: https://pkg.go.dev/github.com/goccy/go-yaml#BytesUnmarshaler
 type ConfigFlag string
 
 func (c ConfigFlag) BeforeResolve(app *kong.Kong, ctx *kong.Context, trace *kong.Path) error {
@@ -39,20 +38,10 @@ func (c ConfigFlag) BeforeResolve(app *kong.Kong, ctx *kong.Context, trace *kong
 		return errors.WithDetails(err, "path", path)
 	}
 	defer file.Close()
-	decoder := yaml.NewDecoder(file)
-	decoder.KnownFields(true)
-	err = decoder.Decode(app.Model.Target.Addr().Interface())
-	if err != nil {
-		var yamlErr *yaml.TypeError
-		if errors.As(err, &yamlErr) {
-			e := "error"
-			if len(yamlErr.Errors) > 1 {
-				e = "errors"
-			}
-			return errors.Errorf("yaml: unmarshal %s: %s", e, strings.Join(yamlErr.Errors, "; "))
-		} else if errors.Is(err, io.EOF) {
-			return nil
-		}
+	err = yaml.NewDecoder(file, yaml.DisallowUnknownField()).Decode(app.Model.Target.Addr().Interface())
+	if errors.Is(err, io.EOF) { //nolint:revive
+		// Nothing.
+	} else if err != nil {
 		return errors.WithStack(err)
 	}
 	return nil

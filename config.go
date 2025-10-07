@@ -37,7 +37,7 @@ func (c ConfigFlag) BeforeResolve(app *kong.Kong, ctx *kong.Context, trace *kong
 	if err != nil {
 		return errors.WithDetails(err, "path", path)
 	}
-	defer file.Close()
+	defer file.Close() //nolint:errcheck
 	err = yaml.NewDecoder(file, yaml.DisallowUnknownField()).Decode(app.Model.Target.Addr().Interface())
 	if errors.Is(err, io.EOF) { //nolint:revive
 		// Nothing.

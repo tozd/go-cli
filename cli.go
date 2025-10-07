@@ -128,7 +128,7 @@ func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors
 
 	logFile, errE := zerolog.New(config)
 	if logFile != nil {
-		defer logFile.Close()
+		defer logFile.Close() //nolint:errcheck
 	}
 	if errE != nil {
 		parser.Fatalf("% -+#.1v", errE)

@@ -1,3 +1,4 @@
+// Command single shows how to use a single command.
 package main
 
 import (

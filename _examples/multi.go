@@ -1,3 +1,4 @@
+// Command multi shows how to use multiple commands.
 package main
 
 import (

@@ -3,7 +3,7 @@ module gitlab.com/tozd/go/cli
 go 1.24.0
 
 require (
-	github.com/alecthomas/kong v1.12.2-0.20250922094329-a62e6a47decf
+	github.com/alecthomas/kong v1.13.1-0.20260401093329-db421839da20
 	github.com/goccy/go-yaml v1.18.0
 	github.com/rs/zerolog v1.34.1-0.20250418111443-9dacc014f38d
 	gitlab.com/tozd/go/errors v0.10.0

@@ -78,7 +78,7 @@ type hasLoggingConfig interface {
 // [Kong]: https://github.com/alecthomas/kong
 // [zerolog]: https://gitlab.com/tozd/go/zerolog
 // [dinit]: https://gitlab.com/tozd/dinit
-func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors.E, options ...kong.Option) {
+func Run(config hasLoggingConfig, vars kong.Vars, run func(*Context) errors.E, options ...kong.Option) {
 	// Inside this function, panicking should be set to false before all regular returns from it.
 	panicking := true
 
@@ -138,11 +138,34 @@ func Run(config hasLoggingConfig, vars kong.Vars, run func(*kong.Context) errors
 	// This way we do not have to know anything about the config structure.
 	logger := log.Logger
 
-	errE = run(ctx)
+	errE = run(&Context{Context: ctx})
 	if errE != nil {
 		logger.Error().Err(errE).Send()
 		exitCode = errorExitCode
 	}
 
 	panicking = false
+}
+
+// Context is a wrapper around [kong.Context] that adds support for [errors.E] errors to it.
+type Context struct {
+	*kong.Context
+}
+
+// Run wraps [kong.Context.Run] and returns an [errors.E] error.
+func (c *Context) Run(binds ...any) errors.E {
+	// We know that err is either nil, a joined error, or a simple error returned from fmt.Errorf.
+	err := c.Context.Run(binds...)
+	if err == nil {
+		return nil
+	}
+	errs := errors.Unjoin(err)
+	if errs == nil {
+		// err is a simple error.
+		return errors.WithStack(err)
+	}
+	// We re-join using errors.Join which skips nil errors.
+	// err return from kong.Context.Run might have nil errors and we want to get rid of them.
+	// See: https://github.com/alecthomas/kong/pull/585
+	return errors.Join(errs...)
 }

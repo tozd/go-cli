@@ -24,7 +24,7 @@ func main() {
 	var app App
 	cli.Run(&app, kong.Vars{
 		"defaultMessage": DefaultMessage,
-	}, func(ctx *kong.Context) errors.E {
+	}, func(ctx *cli.Context) errors.E {
 		app.Logger.Info().Str("program", ctx.Model.Name).Msg(app.Message)
 		return nil
 	})

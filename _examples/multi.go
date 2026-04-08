@@ -52,7 +52,7 @@ type App struct {
 
 func main() {
 	var app App
-	cli.Run(&app, nil, func(ctx *kong.Context) errors.E {
-		return errors.WithStack(ctx.Run(&app.Globals))
+	cli.Run(&app, nil, func(ctx *cli.Context) errors.E {
+		return ctx.Run(&app.Globals)
 	})
 }

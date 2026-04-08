@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-04-08
+
 ### Changed
 
 - Automatically wrap errors from run callback.
@@ -84,7 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First public release.
 
-[unreleased]: https://gitlab.com/tozd/go/cli/-/compare/v0.6.1...main
+[unreleased]: https://gitlab.com/tozd/go/cli/-/compare/v0.7.0...main
+[0.7.0]: https://gitlab.com/tozd/go/cli/-/compare/v0.6.1...v0.7.0
 [0.6.1]: https://gitlab.com/tozd/go/cli/-/compare/v0.6.0...v0.6.1
 [0.6.0]: https://gitlab.com/tozd/go/cli/-/compare/v0.5.1...v0.6.0
 [0.5.1]: https://gitlab.com/tozd/go/cli/-/compare/v0.5.0...v0.5.1
